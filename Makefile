@@ -361,8 +361,8 @@ MODFLAGS	= -DMODULE $(KERNELFLAGS)
 CFLAGS_MODULE   = $(MODFLAGS)
 AFLAGS_MODULE   = $(MODFLAGS)
 LDFLAGS_MODULE  = -T $(srctree)/scripts/module-common.lds
-CFLAGS_KERNEL	= $ -mtune=cortex-a7 -marm -ffast-math -mfpu=neon-vfpv4 -mvectorize-with-neon-quad
-AFLAGS_KERNEL	= $-mtune=cortex-a7 -marm -ffast-math -mfpu=neon-vfpv4 -mvectorize-with-neon-quad
+CFLAGS_KERNEL	= -mtune=cortex-a7 -marm -ffast-math -mfpu=neon-vfpv4 -mvectorize-with-neon-quad
+AFLAGS_KERNEL	= -mtune=cortex-a7 -marm -ffast-math -mfpu=neon-vfpv4 -mvectorize-with-neon-quad
 CFLAGS_GCOV	= -fprofile-arcs -ftest-coverage
 
 
