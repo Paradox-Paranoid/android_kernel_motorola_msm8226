@@ -10,7 +10,7 @@
  */
 #include <linux/linkage.h>
 
-	.arch	armv7-a
+	.arch	-mtune=cortex-a7
 /*
  * Debugging stuff
  *
