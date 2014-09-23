@@ -1,0 +1,4 @@
+service tgm-sh /system/bin/sh /init.tgm.sh
+	class late_start
+	user root
+	oneshot
