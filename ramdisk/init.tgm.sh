@@ -29,12 +29,8 @@
 
 # Disable MPD, enable intelliplug
 if [ -e /sys/module/intelli_plug/parameters/intelli_plug_active ]; then
-	stop mpdecision
 	echo "1" > /sys/module/intelli_plug/parameters/intelli_plug_active
 	echo "[furnace] IntelliPlug enabled" | tee /dev/kmsg
-else
-	echo "[furnace] IntelliPlug not found, using MPDecision" | tee /dev/kmsg
-	start mpdecision
 fi
 
 # Enable powersuspend
