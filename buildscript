@@ -3,10 +3,10 @@
 # Final zip will exist in "build" as "furnace-1.0.0-aosp_hammerhead.zip" for example
 # If you are using a non-appended dt.image, you will need to add "--dt path/to/dt.img" and
 # the appropriate lines for dtbTool to compile it, if not prebuilt.
-build=/home/yoshishapow/kernels/Green_Machine_Builds
+build=/home/yoshishapow/kernel/Green_Machine_Builds
 kernel="The-Green-Machine"
 version="4.0.0"
-variant="test"
+variant="official"
 ramdisk=ramdisk
 toolchain=/home/yoshishapow/linaro_toolchain/bin
 toolchain2="arm-eabi-"
@@ -20,7 +20,7 @@ tags_offset=0x00000100
 cmdline="console=ttyHSL0,115200,n8 androidboot.console=ttyHSL0 androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x37 vmalloc=400M utags.blkdev=/dev/block/platform/msm_sdcc.1/by-name/utags androidboot.write_protect=0 zcache androidboot.selinux=permissive"
 
 if [ "$1" = "local" ]; then
-	build=/home/yoshishapow/kernels/testfalcon
+	build=/home/yoshishapow/kernel/testfalcon
 	toolchain=/home/yoshishapow/linaro_toolchain/bin
 fi
 
@@ -45,11 +45,20 @@ if [ -f ozip/boot.img ]; then
 		* )
 			echo "Invalid...";;
 	esac
-	read -p "Begin build now..(y/n)? : " dchoice
+	read -p "Make Config..(y/n)? : " dchoice
 	case "$dchoice" in
 		y|Y)
 			make "$config"
-			make "$jobcount"
+			make menuconfig ;;
+		n|N )
+			exit 0;;
+		* )
+			echo "Invalid...";;
+	esac
+	read -p "Begin build now..(y/n)? : " echoice
+	case "$echoice" in
+		y|Y)
+			make "$jobcount" 
 			exit 0;;
 		n|N )
 			exit 0;;
@@ -95,10 +104,19 @@ else
 		* )
 			echo "Invalid...";;
 	esac
-	read -p "Begin build now..(y/n)? : " bchoice
+	read -p "Make Config..(y/n)? : " bchoice
 	case "$bchoice" in
 		y|Y)
 			make "$config"
+			make menuconfig ;;
+		n|N )
+			exit 0;;
+		* )
+			echo "Invalid...";;
+	esac
+	read -p "Begin build now..(y/n)? : " fchoice
+	case "$fchoice" in
+		y|Y)
 			make "$jobcount"
 			exit 0;;
 		n|N )
